@@ -18,9 +18,7 @@ const Navbar = () => {
             </Link>
         </li>
         <li>
-            <Link>
                 Logout
-            </Link>
         </li>
       </ul>
     
