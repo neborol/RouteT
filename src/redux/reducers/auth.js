@@ -2,11 +2,12 @@ import {
     REGISTER_SUCCESS, 
     REGISTER_FAIL,
     USER_LOADED,
-    AUTH_ERROR
+    AUTH_ERROR,
+    LOGOUT
  } from '../actions/types';
 
 const initialState = {
-    isAuthenticated: null,
+    isAuthenticated: false,
     loading: true, // Loading is normally applicable to display a spinner during an async process. 
     user: null
 }
@@ -18,6 +19,7 @@ export default function auth (state = initialState, action) {
 
     switch(type) {
         case REGISTER_SUCCESS:
+           sessionStorage.setItem('currentUser', JSON.stringify(payload)); 
            return {
                ...state, // We have to spread the current state first, to prevent mutation of the state.
                user: payload, // The user data that was dispatched as the payload, would be received here and saved in the store.
@@ -26,7 +28,8 @@ export default function auth (state = initialState, action) {
            }
 
         case REGISTER_FAIL: // In cage the registration fails, this action gets dispatched, and we update the state as follows:
-            return {
+        case LOGOUT:
+        return {
                 ...state, // // We have to spread the current state first, to prevent mutation of the state.
                 isAuthenticated: false, // We set isAuthenticated to false
                 loading: false // Even when the registration fails, we still have to stop the spinner, so we set loading to false.
