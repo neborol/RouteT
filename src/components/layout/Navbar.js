@@ -49,10 +49,15 @@ const Navbar = ({auth: { isAuthenticated }, logout }) => {
 
     return (
       <nav className="navbar bg-dark">
-        <span>
-          <img className="app-logo" src="assets/images/logo.png" alt="App logo" />
-          <h1><Link to="/"> Devability</Link></h1> 
-        </span>
+        <Link to="/">
+          <div className="horiz-items-container">
+            <span>
+              <img className="app-logo" src="assets/images/logo.png" alt="App logo" />
+            </span>
+            <h1 className="app-name"> Devability</h1>           
+          </div>
+        </Link>
+
         { isAuthenticated ? privateLinks : publicLinks }
       </nav>
     )
