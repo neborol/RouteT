@@ -40,6 +40,11 @@ const Navbar = ({auth: { isAuthenticated, user }, logout }) => {
           </NavLink>
       </li>
       <li>
+          <NavLink to="/dashboard">
+              My Dashboard
+          </NavLink>
+      </li>
+      <li>
         <Link to="#!" onClick={logout}>
           Logout
         </Link>
