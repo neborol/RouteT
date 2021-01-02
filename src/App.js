@@ -11,6 +11,7 @@ import CreateProfile from './components/profile-forms/CreateProfile';
 import EditProfile from './components/profile-forms/EditProfile';
 import Approved from './components/approved/Approved';
 import Pool from './components/pool/Pool';
+import PrivateRoute from './components/utilities/PrivateRoute';
 import './App.scss';
 
 
@@ -24,12 +25,12 @@ function App() {
           <Switch>
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
-            <Route exact path='/profile' component={MyProfile} />
-            <Route exact path='/project-dashboard' component={ProjectDashboard} /> 
-            <Route exact path='/create-profile' component={CreateProfile} />
-            <Route exact path='/edit-profile' component={EditProfile} /> 
             <Route exact path='/approved' component={Approved} /> 
             <Route exact path='/ideas-pool' component={Pool} /> 
+            <PrivateRoute exact path='/project-dashboard' component={ProjectDashboard} /> 
+            <PrivateRoute exact path='/profile' component={MyProfile} />
+            <PrivateRoute exact path='/create-profile' component={CreateProfile} />
+            <PrivateRoute exact path='/edit-profile' component={EditProfile} /> 
           </Switch>
         </section>
         
