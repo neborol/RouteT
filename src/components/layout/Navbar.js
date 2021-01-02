@@ -14,11 +14,6 @@ const Navbar = ({auth: { isAuthenticated }, logout }) => {
               All Ideas
           </Link>
       </li>
-      <li>
-          <Link to="/project-dashboard">
-              <span className='hide-sm'>Project Dashboard</span>
-          </Link>
-      </li>
       <li><Link to="/register">Register</Link></li>
       <li><Link to="/login">Login</Link></li>
     </ul>
@@ -27,6 +22,11 @@ const Navbar = ({auth: { isAuthenticated }, logout }) => {
 
   const privateLinks = (
     <ul>
+      <li>
+          <Link to="/project-dashboard">
+              <span className='hide-sm'>Project Dashboard</span>
+          </Link>
+      </li>
       <li>
           <Link to="/approved">
               Approved
@@ -58,7 +58,8 @@ const Navbar = ({auth: { isAuthenticated }, logout }) => {
           </div>
         </Link>
 
-        { isAuthenticated ? privateLinks : publicLinks }
+       { isAuthenticated ? privateLinks : publicLinks }
+       
       </nav>
     )
 }

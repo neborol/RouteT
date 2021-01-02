@@ -11,7 +11,7 @@ import {
     LOGIN_FAIL
 } from './types';
 
-import toastify from '../../components/layout/Toastify';
+import toastify from '../../components/utilities/Toastify';
 
 // Load User
 export const loadUser = (data) => async dispatch => {
@@ -34,10 +34,10 @@ export const loadUser = (data) => async dispatch => {
 }
 
 // Register User
-export const register = ({ name, email, password }) => async dispatch => {
+export const register = ({ name, email, password, loggedIn }) => async dispatch => {
 
     // const body = JSON.stringify({name, email, password});
-    const body = { name, email, password };
+    const body = { name, email, password, loggedIn };
 
     try {
         // Async request to store the registered user data
@@ -85,16 +85,21 @@ export const login = (email, password) => dispatch => {
 
         // For simplicity sake, I would do a siple login validation here, and if successful, I woul broadcast login success.
         // Get registered user from the session storage.
-        const currentDev = JSON.parse(sessionStorage.getItem('currentUser'));
+        const currentDev = JSON.parse(localStorage.getItem('currentUser'));
 
         if (email === currentDev.email && password === currentDev.password) {
             toastify.success('Login is Successful!');
+
+            const testUser = { email, password, name: currentDev.name, loggedIn: true };
+
+            // Normally, I would not pass the password to the local storage. 
+            //      I am just doing it here because for simplicity sake, that is where I am storing the password for now.
             dispatch({
                 type: LOGIN_SUCCESS,
-                payload: { email, password, name: currentDev.name }
+                payload: testUser
             });
 
-            dispatch(loadUser());       
+            dispatch(loadUser(testUser));       
         } else {
             toastify.error('Login Failed!');
             dispatch({
@@ -104,12 +109,6 @@ export const login = (email, password) => dispatch => {
         }
 
     } catch (err) {
-        const errors = err.response.data.errors;
-
-        if (errors) {
-            errors.forEach(err => console.log(err.msg));
-        }
-
         dispatch({
             type: LOGIN_FAIL
         });

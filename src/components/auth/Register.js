@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { register } from '../../redux/actions/auth';
-import toastify from '../layout/Toastify';
+import toastify from '../utilities/Toastify';
 
 
 const Register = ({ register, isAuthenticated}) => {
@@ -32,7 +32,8 @@ const Register = ({ register, isAuthenticated}) => {
             register({
                 name,
                 email,
-                password
+                password,
+                loggedIn: false
             });
         }
     }

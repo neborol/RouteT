@@ -2,5 +2,5 @@ import { combineReducers } from 'redux'; // The combineReducer puts together all
 import auth from './auth';
 
 export default combineReducers({
-    auth // At this point, we are managing only the auth section of the app.
+    auth // This represents just a specific section of the state that would be referenced within the app.
 });

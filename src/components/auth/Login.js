@@ -6,6 +6,7 @@ import { login } from '../../redux/actions/auth';
 
 
 
+
 const Login = ({login, isAuthenticated}) => {
     const [formData, setFormData] = useState({
         email: '',
@@ -24,13 +25,14 @@ const Login = ({login, isAuthenticated}) => {
 
     // Redirect if logged in
     if (isAuthenticated) {
-        return <Redirect to="/project-dashboard" />
+        return <Redirect to="/profile" />
     }
+
 
     return <>
             <h1 className="large text-primary">Sign In</h1>
             {/* <Spinner loading={false} /> */}
-            <p className="lead"><i className="fas fa-user"></i> Sign Into Your Account</p>
+            <p className="lead"> Sign Into Your Account</p>
             <form className="form" onSubmit={e => onSubmit(e)}>
 
                 <div className="form-group">
