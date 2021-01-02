@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { logout } from '../../redux/actions/auth';
 import PropTypes from 'prop-types';
@@ -6,16 +7,17 @@ import { connect } from 'react-redux';
 
 
 
-const Navbar = ({auth: { isAuthenticated }, logout }) => {
+const Navbar = ({auth: { isAuthenticated, user }, logout }) => {
+  console.log('TUser', user);
   const publicLinks = (
     <ul>
       <li>
-          <Link to="/ideas-pool">
+          <NavLink to="/ideas-pool">
               All Ideas
-          </Link>
+          </NavLink>
       </li>
-      <li><Link to="/register">Register</Link></li>
-      <li><Link to="/login">Login</Link></li>
+      <li><NavLink to="/register">Register</NavLink></li>
+      <li><NavLink to="/login">Login</NavLink></li>
     </ul>
   );
 
@@ -23,19 +25,19 @@ const Navbar = ({auth: { isAuthenticated }, logout }) => {
   const privateLinks = (
     <ul>
       <li>
-          <Link to="/project-dashboard">
+          <NavLink to="/project-dashboard">
               <span className='hide-sm'>Project Dashboard</span>
-          </Link>
+          </NavLink>
       </li>
       <li>
-          <Link to="/approved">
+          <NavLink to="/approved">
               Approved
-          </Link>
+          </NavLink>
       </li>
       <li>
-          <Link to="/profile">
+          <NavLink to="/profile">
               My Profile
-          </Link>
+          </NavLink>
       </li>
       <li>
         <Link to="#!" onClick={logout}>

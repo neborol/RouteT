@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 
-const Landing = () => {
+const Landing = ({auth: { user } }) => {
     // So we needed to pass the isAuthenticated property, as a prop, so as to be 
     //     able to check if the user is authenticated, then redirect him to the dashboard
 
@@ -23,8 +25,13 @@ const Landing = () => {
                for the improvement of Company's Business Model.
             </p>
             <div className="buttons">
-              <Link to="/register" className="btn btn-primary">Sign Up</Link>
-              <Link to="/login" className="btn btn-light">Login</Link>
+                { (!user || !user.loggedIn) && (
+                    <>
+                        <NavLink to="/register" className="btn btn-primary">Sign Up</NavLink>
+                        <NavLink to="/login" className="btn btn-light">Login</NavLink>  
+                    </>                  
+                ) }
+
             </div>
           </div>
         </div>
@@ -33,4 +40,12 @@ const Landing = () => {
 }
 
 
-export default Landing;
+Landing.propTypes = {
+  auth: PropTypes.object.isRequired
+}
+  
+const mapStateToProps = state => ({
+   auth: state.auth
+})
+  
+export default connect(mapStateToProps)(Landing); 
