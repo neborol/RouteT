@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/layout/Navbar';
@@ -7,6 +7,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import MyProfile from './components/profile/MyProfile';
 import ProjectDashboard from './components/dashboard/ProjectDashboard';
+import MyDashboard from './components/dashboard/MyDashboard';
 import CreateProfile from './components/profile-forms/CreateProfile';
 import EditProfile from './components/profile-forms/EditProfile';
 import Approved from './components/approved/Approved';
@@ -29,6 +30,7 @@ function App() {
             <Route exact path='/ideas-pool' component={Pool} /> 
             <PrivateRoute exact path='/project-dashboard' component={ProjectDashboard} /> 
             <PrivateRoute exact path='/profile' component={MyProfile} />
+            <PrivateRoute exact path='/dashboard' component={MyDashboard} />
             <PrivateRoute exact path='/create-profile' component={CreateProfile} />
             <PrivateRoute exact path='/edit-profile' component={EditProfile} /> 
           </Switch>
