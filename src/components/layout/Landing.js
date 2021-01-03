@@ -1,13 +1,16 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 
-const Landing = ({auth: { user } }) => {
+const Landing = ({auth: { user, isAuthenticated } }) => {
     // So we needed to pass the isAuthenticated property, as a prop, so as to be 
     //     able to check if the user is authenticated, then redirect him to the dashboard
 
+    if (isAuthenticated) {
+       return <Redirect to='/dashboard' />
+    }
 
 
     return (

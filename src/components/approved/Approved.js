@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { setLoginStatus } from '../../redux/actions/auth';
+import { connect } from 'react-redux';
 
-const Approved = () => {
+
+const Approved = ({ setLoginStatus }) => {
+
+    useEffect(() => {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        currentUser.loggedIn ? setLoginStatus(true) : setLoginStatus(false);
+    }, []);
+
     return (
         <div>
             <h1>All the initiatives that have been approved, will be listed here.</h1>
@@ -8,4 +17,4 @@ const Approved = () => {
     )
 }
 
-export default Approved
+export default connect(null, { setLoginStatus })(Approved)

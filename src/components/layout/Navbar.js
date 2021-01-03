@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 
 
 const Navbar = ({auth: { isAuthenticated, user }, logout }) => {
-  console.log('TUser', user);
   const publicLinks = (
     <ul>
       <li>

@@ -5,7 +5,9 @@ import {
     AUTH_ERROR,
     LOGOUT,
     LOGIN_SUCCESS,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    STATUS_LOGGEDIN,
+    STATUS_NOTLOGGEDIN
  } from '../actions/types';
 
 const initialState = {
@@ -30,11 +32,23 @@ export default function auth (state = initialState, action) {
                loading: false // We set the loading to false to stop the spinner from showing, I will get to that.
            }
 
+        case STATUS_LOGGEDIN:
+            return {
+                ...state,
+                isAuthenticated: true
+            }
+
+        case STATUS_NOTLOGGEDIN:
+            return {
+                ...state,
+                isAuthenticated: false
+            }
+
         case REGISTER_FAIL: // In cage the registration fails, this action gets dispatched, and we update the state as follows:
         case LOGIN_FAIL:
         case AUTH_ERROR:
         case LOGOUT:
-            const userNotLoggedIn = {...state.user, loggedIn: false};
+            const userNotLoggedIn = {...state.auth.user, loggedIn: false};
             localStorage.setItem('currentUser', JSON.stringify(userNotLoggedIn));
             return {
                     ...state, // // We have to spread the current state first, to prevent mutation of the state.

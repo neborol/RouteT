@@ -1,9 +1,15 @@
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, UPDATE_PROFILE, GET_PROFILES, GET_REPOS } from "../actions/types";
+import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, UPDATE_PROFILE, GET_PROFILES } from "../actions/types";
 
 const initialState = {
-    profile: null,
-    profiles: [],
-    repos: [],
+    profile: { 
+        role: 'initiator', 
+        title: 'The erazer program', 
+        problem: 'Erazes pending cases that had already been cancelled',
+        solution: 'Would make pending cases more efficient',
+        duration: '2 Weeks',
+        tools: 'Node Electron',
+        helpers: '2'
+    },
     loading: true,
     errors: {}
 };

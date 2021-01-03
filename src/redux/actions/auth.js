@@ -8,7 +8,9 @@ import {
     AUTH_ERROR,
     LOGOUT,
     LOGIN_SUCCESS,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    STATUS_LOGGEDIN,
+    STATUS_NOTLOGGEDIN
 } from './types';
 
 import toastify from '../../components/utilities/Toastify';
@@ -30,6 +32,21 @@ export const loadUser = (data) => async dispatch => {
         dispatch({
             type: AUTH_ERROR
         });
+    }
+}
+
+
+// Set login status
+export const setLoginStatus = (status) => async dispatch => {
+    
+    if (status) {
+        dispatch({
+            type: STATUS_LOGGEDIN
+        });
+    } else {
+        dispatch({
+            type: STATUS_NOTLOGGEDIN
+        });            
     }
 }
 

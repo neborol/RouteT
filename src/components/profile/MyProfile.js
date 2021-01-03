@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../utilities/Spinner';
@@ -6,9 +6,16 @@ import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import { Link } from 'react-router-dom';
 
+import { setLoginStatus } from '../../redux/actions/auth';
 
 
-const MyProfile = ({ auth }) => {
+
+
+const MyProfile = ({ auth, setLoginStatus }) => {
+    useEffect(() => {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        currentUser.loggedIn ? setLoginStatus(true) : setLoginStatus(false);
+    }, []);
 
     // useEffect(() => {
     //     getProfileById(match.params.id);
@@ -38,4 +45,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps)(MyProfile)
+export default connect(mapStateToProps, { setLoginStatus })(MyProfile)
