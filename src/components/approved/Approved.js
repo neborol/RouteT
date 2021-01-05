@@ -7,8 +7,8 @@ const Approved = ({ setLoginStatus }) => {
 
     useEffect(() => {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        currentUser.loggedIn ? setLoginStatus(true) : setLoginStatus(false);
-    }, []);
+        currentUser.isAuthenticated ? setLoginStatus(true) : setLoginStatus(false);
+    }, [setLoginStatus]);
 
     return (
         <div>
