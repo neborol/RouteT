@@ -7,7 +7,7 @@ import { login } from '../../redux/actions/auth';
 
 
 
-const Login = ({login, isAuthenticated}) => {
+const Login = ({ isAuthenticated, login }) => {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -66,14 +66,15 @@ const Login = ({login, isAuthenticated}) => {
 }
 
 Login.propTypes = {
-    login: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    login: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+// Get the required slices of the store and pass them to the component as props
+const mapStateToProps = store => ({
+    isAuthenticated: store.authSlice.isAuthenticated // Get the isAuthenticated state from the auth slice of the store
 });
 
-// Make the destructured login from state availbale in the Login component as props
-export default connect(mapStateToProps, { login })(Login);
+// Connect the redux world with the component world, while exporting the Login component.
+export default connect(mapStateToProps, { login })(Login);  // login here must be an action creator function required within the component
 

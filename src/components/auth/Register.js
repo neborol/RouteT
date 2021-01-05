@@ -7,7 +7,7 @@ import { register } from '../../redux/actions/auth';
 import toastify from '../utilities/Toastify';
 
 
-const Register = ({ register, isAuthenticated}) => {
+const Register = ({ isAuthenticated, register }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -32,8 +32,7 @@ const Register = ({ register, isAuthenticated}) => {
             register({
                 name,
                 email,
-                password,
-                loggedIn: false
+                password
             });
         }
     }
@@ -93,14 +92,16 @@ const Register = ({ register, isAuthenticated}) => {
         </>
 }
 
+// Validate the data-type of the props passed to the component
 Register.propTypes = {
-    register: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    register: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+// Get the required slices of the store and pass them to the component as props
+const mapStateToProps = store => ({
+    isAuthenticated: store.authSlice.isAuthenticated // Get the isAuthenticated state from the authSlice of the store
 });
 
-// Map state to the props of this Register component while destructuring at the same time, and these props could be retrieved by passing destructured props in the component parameters input.
-export default connect(mapStateToProps, { register})(Register);
+// Connect the redux world with the Register component world, while exporting the Register component
+export default connect(mapStateToProps, { register })(Register);  // register here, must be an action creation function requied within the Register component
