@@ -13,10 +13,14 @@ import EditProfile from './components/profile-forms/EditProfile';
 import Approved from './components/approved/Approved';
 import Pool from './components/pool/Pool';
 import PrivateRoute from './components/utilities/PrivateRoute';
+// import setUser from './components/utilities/setUser';
 import './App.scss';
 
 
+
+
 function App() {
+ 
   return (
     <Router>
       <Navbar />

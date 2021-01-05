@@ -20,6 +20,7 @@
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
+  --highlight-color: rgb(52, 13, 230);
 }
 
 * {
@@ -86,6 +87,10 @@ img {
   margin-bottom: 1rem;
 }
 
+.small {
+  font-size: 1.4rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -97,7 +102,17 @@ img {
 .text-dark {
   color: var(--dark-color);
 }
-
+.highlight {
+  color: var(--highlight-color);
+}
+.req::before{
+  content: "*";
+  color: var(--highlight-color);
+  position: absolute;
+  margin-left: -12px;
+  margin-top: 9px;
+  font-size: 25px;
+}
 
 
 /* Padding */
@@ -459,7 +474,7 @@ button {
 
 .profile-about {
   grid-area: about;
-  text-align: center;
+  text-align: left;
 }
 
 .profile-about .skills {
@@ -516,7 +531,10 @@ button {
   flex: 3;
   flex-basis: 20%;
 }
-
+.item-section {
+  border-bottom: solid 1px var(--primary-color);
+  padding: 4px 15px;
+}
 
 
 
@@ -557,6 +575,23 @@ button {
 }
 
 
+/* General Dashboard */
+.dashboard-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  background-color: var(--primary-color);
+}
+
+.dashboard-items {
+  width: 162px;
+  height: 119px;
+  border: solid 1px gray;
+  margin: 4px;
+  background-color: var(--light-color);
+}
+
+
 
 
 
@@ -584,6 +619,7 @@ button {
   .lead {
     font-size: 1rem;
   }
+
 
 
 
