@@ -1,41 +1,43 @@
 import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, UPDATE_PROFILE, GET_PROFILES } from "../actions/types";
 
-const initialState = {
-    profile: { 
-        role: 'initiator', 
-        title: 'The erazer program', 
-        problem: 'Erazes pending cases that had already been cancelled',
-        solution: 'Would make pending cases more efficient',
-        duration: '2 Weeks',
-        tools: 'Node Electron',
-        helpers: '2'
+const initialstoreSlice = {
+    profile:   {
+        "profileId": "xxxxxxxxxx",
+        "profileOwner": "",
+        "profileFields": {
+          "role": "",
+          "title": "",
+          "problem": "",
+          "solution": "",
+          "duration": "",
+          "breakdown": "",
+          "tools": "",
+          "helpers": "",
+          "status": ""
+        }
     },
+    profileCreated: false,
     loading: true,
     errors: {}
 };
 
-export default function profile (state = initialState, action) {
+export default function profile (storeSlice = initialstoreSlice, action) {
     const { type, payload } = action;
 
     switch(type) {
         case GET_PROFILE:
         case UPDATE_PROFILE:
+            console.log('checkProfile', payload);
             return {
-                ...state,
+                ...storeSlice,
                 profile: payload,
-                loading: false
-            }
-        
-        case GET_PROFILES:
-            return {
-                ...state, 
-                Profiles: payload,
-                loading: false
+                loading: false,
+                profileCreated: true
             }
         
         case PROFILE_ERROR:
             return {
-                ...state, 
+                ...storeSlice, 
                 error: payload,
                 loading: false,
                 profile: null
@@ -43,13 +45,12 @@ export default function profile (state = initialState, action) {
         
         case CLEAR_PROFILE:
             return {
-                ...state, 
+                ...storeSlice, 
                 profile: null,
-                repos: [],
                 loading: false
             }
         
 
-        default: return state;
+        default: return storeSlice;
     }
 }

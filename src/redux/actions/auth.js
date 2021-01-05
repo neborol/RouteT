@@ -14,6 +14,7 @@ import {
 } from './types';
 
 import toastify from '../../components/utilities/Toastify';
+import { v4 as uuidv4 } from 'uuid';
 
 // Load User
 export const loadUser = (data) => async dispatch => {
@@ -51,16 +52,17 @@ export const setLoginStatus = (status) => async dispatch => {
 }
 
 // Register User
-export const register = ({ name, email, password, loggedIn }) => async dispatch => {
+export const register = ({ name, email, password }) => async dispatch => {
 
     // const body = JSON.stringify({name, email, password});
-    const body = { name, email, password, loggedIn };
+    const body = { id: uuidv4(), name, email, password, isAuthenticated: true };
 
     try {
         // Async request to store the registered user data
 
         // If the execution gets to this point, then the above async request to store the user 
         //     was successful, so dispatch a register success action to the store.
+
         dispatch({
             type: REGISTER_SUCCESS,
             payload: body
@@ -107,7 +109,7 @@ export const login = (email, password) => dispatch => {
         if (email === currentDev.email && password === currentDev.password) {
             toastify.success('Login is Successful!');
 
-            const testUser = { email, password, name: currentDev.name, loggedIn: true };
+            const testUser = { email, password };
 
             // Normally, I would not pass the password to the local storage. 
             //      I am just doing it here because for simplicity sake, that is where I am storing the password for now.
