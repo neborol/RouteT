@@ -1,0 +1,8 @@
+{
+    "env": {
+        "MONGO_USER": "robenit33",
+        "MONGO_PASSWORD": "33robenit@3131",
+        "MONGO_DEFAULT_DATABASE": "robenit33",
+        "PORT": 5001
+    }
+}

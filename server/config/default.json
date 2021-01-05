@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://owner33:Hayd331331@cluster0.3enmw.mongodb.net/aturservice?retryWrites=true&w=majority",
+    "jwtSecret": "mysuppersecretagrartoken"
+}
