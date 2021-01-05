@@ -9,10 +9,7 @@ import { connect } from 'react-redux';
 //       points to which component would be loaded for the specified route.
 
 // The '...rest' operator, will represent any other parameters that would be passed to the route in question.
-const PrivateRoute = ({ component: Component, 
-    auth: { isAuthenticated, loading }, 
-    ...rest
-}) => (
+const PrivateRoute = ({ component: Component, authSlice: { isAuthenticated, loading }, ...rest }) => (
     <Route 
         {...rest} 
         render={
@@ -21,12 +18,15 @@ const PrivateRoute = ({ component: Component,
     />
 )
 
+// Validate the data-type of the props passed to the component
 PrivateRoute.propTypes = {
-    auth: PropTypes.object.isRequired,
+    authSlice: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = state => ({
-    auth: state.auth
+// Get the required slices of the store and pass them to the component as props
+const mapStateToProps = store => ({
+    authSlice: store.authSlice // Get the auth slice from the store
 })
 
+// Connect the redux world with the PrivateRoute component's world, while exporting the PrivateRoute component
 export default connect(mapStateToProps)(PrivateRoute); 
