@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 
-const Landing = ({auth: { user, isAuthenticated } }) => {
+const Landing = ({authSlice: { user, isAuthenticated } }) => {
     // So we needed to pass the isAuthenticated property, as a prop, so as to be 
     //     able to check if the user is authenticated, then redirect him to the dashboard
 
-    if (isAuthenticated) {
-       return <Redirect to='/dashboard' />
-    }
+    const userStatus = JSON.parse(localStorage.getItem('currentUser'));
+    if (userStatus.isAuthenticated) {
+        return <Redirect to='/dashboard' />
+    } 
 
 
     return (
@@ -28,7 +29,7 @@ const Landing = ({auth: { user, isAuthenticated } }) => {
                for the improvement of Company's Business Model.
             </p>
             <div className="buttons">
-                { (!user || !user.loggedIn) && (
+                { (!user || !user.isAuthenticated) && (
                     <>
                         <NavLink to="/register" className="btn btn-primary">Sign Up</NavLink>
                         <NavLink to="/login" className="btn btn-light">Login</NavLink>  
@@ -42,13 +43,15 @@ const Landing = ({auth: { user, isAuthenticated } }) => {
     )
 }
 
-
+// Validate the data-type of the props passed to the component
 Landing.propTypes = {
-  auth: PropTypes.object.isRequired
+  authSlice: PropTypes.object.isRequired
 }
   
-const mapStateToProps = state => ({
-   auth: state.auth
+// Get the required slices of the store and pass them to the component as props
+const mapStateToProps = store => ({
+   authSlice: store.authSlice // Get the auth slice from the store
 })
   
+// Connect the redux world to the Landing component world, while exporting the Landing component
 export default connect(mapStateToProps)(Landing); 
