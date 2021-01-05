@@ -1,45 +1,26 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
+import React, { Fragment } from 'react';
 
-const ProfileAbout = (idea=true) => (
+const ProfileAbout = ({ problem, solution, duration }) => (
 
-        <div class="profile-about bg-light p-2">
-            { idea && (
-                <Fragment>
-                    <h2 className="text-primary">Top ideas</h2> 
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed</p>   
-                </Fragment>
-            ) }
-          <h2 class="text-primary">Roland's Imaginations</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed
-            doloremque nesciunt, repellendus nostrum deleniti recusandae nobis
-            neque modi perspiciatis similique?
-          </p>
-          <div class="line"></div>
-          <h2 class="text-primary">feature Set</h2>
-          <div class="skills">
-               
-                   <div className="p-1">
-                       check-icon feature-1
-                   </div>
-                   <div className="p-1">
-                       check-icon feature-2
-                   </div>
-                   <div className="p-1">
-                       check-icon feature-3
-                   </div>
-                   <div className="p-1">
-                       check-icon feature-4
-                   </div>
-               
-          </div>
+        <div className="profile-about bg-light p-2">
+            <div className="section-details">
+                <h1 className="text-primary">Highlight of initiative:</h1> 
+                <hr/>
+                <div className="item-section">
+                    <h3>Problem to be resolved:</h3>
+                    <p>{ problem }</p> 
+                </div>
+                <div className="item-section">
+                    <h3>Nature of the solution:</h3>
+                    <p>{ solution }</p> 
+                </div>
+                <div className="item-section">
+                    <h3>Duration:</h3>
+                    <p>{ duration }</p>
+                </div>
+            </div>
         </div>
 )
 
-
-// ProfileAbout.propTypes = {
-//     profile: PropTypes.object.isRequired
-// }
 
 export default ProfileAbout
