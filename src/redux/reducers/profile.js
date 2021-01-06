@@ -27,7 +27,6 @@ export default function profile (storeSlice = initialstoreSlice, action) {
     switch(type) {
         case GET_PROFILE:
         case UPDATE_PROFILE:
-            console.log('checkProfile', payload);
             return {
                 ...storeSlice,
                 profile: payload,
@@ -39,8 +38,7 @@ export default function profile (storeSlice = initialstoreSlice, action) {
             return {
                 ...storeSlice, 
                 error: payload,
-                loading: false,
-                profile: null
+                loading: false
             }
         
         case CLEAR_PROFILE:
