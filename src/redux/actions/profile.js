@@ -46,6 +46,41 @@ export const createProfile = (formData, history, edit = false) => async dispatch
     }
 }
 
+// update a profile
+export const editProfileItem = (key, val) => async dispatch => { 
+    getUserIdentity() 
+                                                    
+    try {
+        const config = {
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }
+
+        const updateObj = {};
+        updateObj[key] = val;
+
+        const resp = await axios.post(`${configData.base_url}/api/profile/edit`, updateObj, config);
+        console.log('Edited', resp.data);
+        dispatch({
+            type: GET_PROFILE,
+            payload: resp.data
+        });
+
+        toastify.success('Profile edited');
+
+    } catch (err) {
+        const msg = 'Something went wrong while editing a profile.';
+        console.log(err); // In production, I would not log the original errors to the console.
+        toastify.error(msg);
+       
+        dispatch({
+           type: PROFILE_ERROR,
+           payload: { msg } 
+        });
+    }
+}
+
 
 
 // Get current users profile
