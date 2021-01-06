@@ -118,6 +118,62 @@ router.post('/', auth, async (req, res) => {
 
 
 
+// @route  POST api/profile/edit
+// @desc   Will update a user's profile
+// @access Private
+router.post('/edit', auth, async (req, res) => {
+    try {
+        async function edit_a_profile() {
+            let readData = await dataReader(profilePath);
+
+
+            if (req.user) {
+                let newProfile = {};
+                const Usr = JSON.parse(req.user);
+                readData = JSON.parse(readData);
+                let newProfiles = readData.map(profile => {
+                    if (profile.profileId === Usr.id) {
+                        profile.profileFields = {...profile.profileFields, ...req.body};
+                        newProfile = profile; // Update the new profile
+                    }
+
+                    return profile;
+                });
+
+                         
+                // Stringify the above data prior to writing back to the file
+                const stringedData = JSON.stringify(newProfiles, '\t', 2); 
+
+                /* Now write it to the file */
+                await fs.writeFile(profilePath, stringedData, function(err) {
+                    if (err) {
+                        console.error(err);
+                        return false;
+                    } else {
+                        return res.status(201).json(newProfile);
+                    }
+                }); 
+            }
+
+        }
+
+        edit_a_profile();
+
+        } catch(e) {
+            console.log('Error:', e.stack);
+            res.status(500).send('Server Error')
+        }
+
+    }
+);
+
+
+
+
+
+
+
+
 // @route  GET api/profile/myprofile
 // @desc   Get current users profile
 // @access Private
@@ -139,11 +195,14 @@ router.get('/myprofile', auth, async (req, res) => {
                         return res.status(404).send('No valid User id found!');
                     } else {
                         const readDataObj = JSON.parse(readData);
+                        let selectedProfile;
                         // Get whomever the currently logged-in user is
-                        const selectedProfile = readDataObj.find(data => {
-                            return data.profileId === Usr.id;
-                        }); 
-                        
+                        if (readDataObj) {
+                            selectedProfile = readDataObj.find(data => {
+                                return data.profileId === Usr.id;
+                            }); 
+                        }
+
                         // console.log('Final', JSON.stringify(selectedProfile));
                         return res.status(200).json(selectedProfile);   // Send the found profile to the browser.
                     }                    
@@ -163,117 +222,6 @@ router.get('/myprofile', auth, async (req, res) => {
 });
 
 
-
-// @route  GET api/profile
-// @desc   Get all profiles
-// @access Public
-router.get('/', async (req, res) => {
-    try {
-        const profiles = await Profile.find().populate('user', ['name', 'avatar']);
-        res.json(profiles);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
-
-
-// @route  GET api/profile/user/:user_id
-// @desc   Get profile by user ID
-// @access Public
-router.get('/user/:user_id', async (req, res) => {
-    try {
-        const profile = await Profile.findOne({ user: req.params.user_id}).populate('user', ['name', 'avatar']);
-        if (!profile) {
-            return res.status(400).json({ msg: 'Profile not found'});
-        }
-
-        res.json(profile);
-
-    } catch (err) {
-        console.error(err.message);
-        if (err.kind === 'ObjectId') {
-            return res.status(400).json({ msg: 'Profile not found'});
-        }
-        res.status(500).send('Server Error');
-    }
-});
-
-// @route  DELETE api/profile
-// @desc   Delete profile, user and posts
-// @access Private
-router.delete('/', async (req, res) => {
-    try {
-        // Remove user posts
-        await Post.deleteMany({ user: req.user.id});
-        // This would remove a profile
-        await Profile.findOneAndRemove({ user: req.user.id });
-        // This would remove a user
-        await User.findOneAndRemove({ _id: req.user.id });
-        res.json({ msg: 'User deleted' });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
-
-// @route  PUT api/profile/experience
-// @desc   Add profile experience
-// @access Private
-router.put('/experience', async (req, res) => {
-    try {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({errors: errors.array()});
-        }
-        
-        const {
-            title, company, location, from, to, current, description
-        } = req.body;
-
-        const newExp = {
-            title,
-            company,
-            location,
-            from,
-            to,
-            current,
-            description
-        }
-
-        try {
-            const profile = await Profile.findOne({ user: req.user.id});
-            profile.experience.unshift(newExp);
-            await profile.save();
-            res.json(profile); // Would be need in the front-end
-        } catch (err) {
-            console.error(err.message);
-            res.status(500).send('Server error')
-        }
-
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
-
-
-// @route  DELETE api/profile/experience/:exp_id
-// @desc   Delete experience from profile
-// @access Private
-router.delete('/experience/:exp_id', async (req, res) => {
-    try {
-        const profile = await Profile.findOne({ user: req.user.id });
-        // Get remove index
-        const removeIndex = profile.experience.map(item => item.id).indexOf(req.params.exp_id);
-        profile.experience.splice(removeIndex, 1);
-        await profile.save();
-        res.json(profile);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-})
 
 
 
