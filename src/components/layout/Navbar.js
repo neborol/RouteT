@@ -5,9 +5,9 @@ import { logout } from '../../redux/actions/auth';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+const userStatus = JSON.parse(localStorage.getItem('currentUser'));
 
-
-const Navbar = ({authSlice: { isAuthenticated, user }, logout }) => {
+const Navbar = ({ logout }) => {
   const publicLinks = (
     <ul>
       <li>
@@ -64,7 +64,7 @@ const Navbar = ({authSlice: { isAuthenticated, user }, logout }) => {
           </div>
         </Link>
 
-       { isAuthenticated ? privateLinks : publicLinks }
+       { userStatus.isAuthenticated ? privateLinks : publicLinks }
        
       </nav>
     )
@@ -72,14 +72,9 @@ const Navbar = ({authSlice: { isAuthenticated, user }, logout }) => {
 
 // Validate the data-type of the props passed to the component
 Navbar.propTypes = {
-  authSlice: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired
 }
 
-// Get the required slices of the store and pass them to the component as props
-const mapStateToProps = store => ({
-  authSlice: store.authSlice
-})
 
 // Connect the redux world to the Navbar component world
-export default connect(mapStateToProps, { logout })(Navbar);  // logout here is an action creation function that Navbar requires
+export default connect(null, { logout })(Navbar);  // logout here is an action creation function that Navbar requires

@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 
-const Landing = ({authSlice: { user, isAuthenticated } }) => {
-    // So we needed to pass the isAuthenticated property, as a prop, so as to be 
-    //     able to check if the user is authenticated, then redirect him to the dashboard
+const Landing = ({authSlice: { user } }) => {
 
     const userStatus = JSON.parse(localStorage.getItem('currentUser'));
     if (userStatus.isAuthenticated) {
