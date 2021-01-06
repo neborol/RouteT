@@ -447,7 +447,6 @@ button {
     'about about'
     'exp edu'
     'github github';
-  grid-gap: 1rem;
 }
 
 .profile-top {
@@ -535,6 +534,11 @@ button {
   border-bottom: solid 1px var(--primary-color);
   padding: 4px 15px;
 }
+.flx {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
 
 
@@ -592,7 +596,32 @@ button {
 }
 
 
-
+/* Step Design */
+.structure-display {
+  display: flex;
+}
+.stepContainer {
+  display: flex;
+}
+.stepCircle {
+  border: solid 4px #8a8a8d;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  font-size: 19px;
+  border-radius: 50%;
+  width: 110px;
+  height: 110px;
+  padding-top: 32px;
+  text-align: center;
+}
+.stepLink {
+  border: solid 4px #8a8a8d;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  width: 10px;
+  height: 14px;
+  margin-top: 39%;
+}
 
 
 /* Mobile Styles */
