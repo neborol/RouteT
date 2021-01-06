@@ -15,7 +15,7 @@ import Pool from './components/pool/Pool';
 import PrivateRoute from './components/utilities/PrivateRoute';
 // import setUser from './components/utilities/setUser';
 import './App.scss';
-
+import IdeaBreakdown from './components/breakdown/IdeaBreakdown';
 
 
 
@@ -34,6 +34,7 @@ function App() {
             <Route exact path='/ideas-pool' component={Pool} /> 
             <PrivateRoute exact path='/project-dashboard' component={ProjectDashboard} /> 
             <PrivateRoute exact path='/profile' component={MyProfile} />
+            <PrivateRoute exact path='/breakdown' component={IdeaBreakdown} />
             <PrivateRoute exact path='/dashboard' component={MyDashboard} />
             <PrivateRoute exact path='/create-profile' component={CreateProfile} />
             <PrivateRoute exact path='/edit-profile' component={EditProfile} /> 
