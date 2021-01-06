@@ -5,6 +5,7 @@ import Spinner from '../utilities/Spinner';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import { Link } from 'react-router-dom';
+import { FaChartPie } from "react-icons/fa";
 
 import { setLoginStatus } from '../../redux/actions/auth';
 import { getCurrentProfile } from '../../redux/actions/profile';
@@ -25,6 +26,10 @@ const MyProfile = ({ authSlice, profileSlice: { profile }, setLoginStatus, getCu
         // Get the currently logged in User's profile and display it
         getCurrentProfile();
     }, []);
+
+    const breakdown = () => {
+
+    }
 
     // console.log('TestProfile', profile);
 
@@ -58,9 +63,17 @@ const MyProfile = ({ authSlice, profileSlice: { profile }, setLoginStatus, getCu
                         <h3>Number of other developers to help:</h3>
                         <p>{ profile.profileFields.helpers }</p> 
                     </div>
-                    <div className="item-section">
-                        <h3>Sectional breakdown:</h3>
-                        <p>{ profile.profileFields.breakdown }</p>
+                    <div className="item-section flx">
+                        <div>
+                            <h3>Summary of breakdown:</h3>
+                            <p>{ profile.profileFields.breakdown }</p>                            
+                        </div>
+                        <div>
+                            <Link to="/breakdown" className="btn btn-primary"> 
+                                <FaChartPie color={"#fdf090"}/> {' + '} Add a Breakdown Structure 
+                            </Link>
+                        </div>
+
                     </div>
                     <div className="item-section">
                         <h3>Current Status:</h3>
