@@ -10,7 +10,8 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     STATUS_LOGGEDIN,
-    STATUS_NOTLOGGEDIN
+    STATUS_NOTLOGGEDIN,
+    CLEAR_PROFILE
 } from './types';
 
 import toastify from '../../components/utilities/Toastify';
@@ -90,6 +91,10 @@ export const logout = () => dispatch => {
 
     dispatch({
         type: LOGOUT
+    });
+
+    dispatch({
+        type: CLEAR_PROFILE
     });
 }
 

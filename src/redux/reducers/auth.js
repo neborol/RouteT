@@ -67,7 +67,8 @@ export default function auth (storeSlice = initialStoreSlice, action) {
                     ...storeSlice, // // We have to spread the current storeSlice first, to prevent mutation of the storeSlice.
                     isAuthenticated: false, // We set isAuthenticated to false
                     loading: false, // Even when the registration fails, we still have to stop the spinner, so we set loading to false.
-                    user: JSON.parse(localStorage.getItem('currentUser'))
+                    user: JSON.parse(localStorage.getItem('currentUser')),
+                    profile: null
                 }
 
         case USER_LOADED:

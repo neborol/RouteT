@@ -1,4 +1,4 @@
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, UPDATE_PROFILE, GET_PROFILES } from "../actions/types";
+import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, UPDATE_PROFILE, GET_PROFILES, PROFILE_CREATED } from "../actions/types";
 
 const initialstoreSlice = {
     profile:   {
@@ -27,6 +27,13 @@ export default function profile (storeSlice = initialstoreSlice, action) {
     switch(type) {
         case GET_PROFILE:
         case UPDATE_PROFILE:
+            return {
+                ...storeSlice,
+                profile: payload,
+                loading: false
+            }
+
+        case PROFILE_CREATED:
             return {
                 ...storeSlice,
                 profile: payload,

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { 
-    GET_PROFILE, PROFILE_ERROR
+    GET_PROFILE, PROFILE_ERROR, PROFILE_CREATED
 } from './types';
 
 import toastify from '../../components/utilities/Toastify';
@@ -22,6 +22,11 @@ export const createProfile = (formData, history, edit = false) => async dispatch
         }
 
         const resp = await axios.post(`${configData.base_url}/api/profile`, formData, config);
+        
+        dispatch({
+            type: PROFILE_CREATED,
+            payload: resp.data
+        });
 
         dispatch({
             type: GET_PROFILE,
