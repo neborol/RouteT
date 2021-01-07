@@ -14,6 +14,7 @@ const IdeaBreakdown = ({ profile, getCurrentProfile, editProfileItem }) => {
     
     const [devNumberEditing, toggleDevNumber] = useState(false);
     // const [showStepsForm, toggleStepDisplay] = useState(false);
+    const [numSteps, setNumSteps] = useState(0);
     const [devNumber, setNumDevs] = useState(0);
     const [stepData, setStepData] = useState({});
     const [inputValue, setInputValue] = useState('');
@@ -73,13 +74,16 @@ const IdeaBreakdown = ({ profile, getCurrentProfile, editProfileItem }) => {
                 <form className="form">
                     
                     <div className="form-group req">
+                        
                         <h3>
-                            Enter the number of steps required before finish: 
-                        </h3>
+                            Enter the number of steps required before finish:   <span> { numSteps }</span>
+                        </h3> 
                         <input type="text" 
                             placeholder="Number of Steps involved" 
-                            name="numsteps" value="0" 
-                            onChange={e => onChange(e)} 
+                            name="numsteps"
+                            value={numSteps}
+                            onChange={(e) => setNumSteps(e.target.value)}
+                            onBlur={(e) => setNumSteps(e.target.value)} 
                         />
                         <small className="form-text">The number of steps required for this process.</small>
                     </div>   
