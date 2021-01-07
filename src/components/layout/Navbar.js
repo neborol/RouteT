@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 const userStatus = JSON.parse(localStorage.getItem('currentUser'));
 
-const Navbar = ({ logout }) => {
+const Navbar = ({ authSlice: { isAuthenticated }, profileSlice: { profileCreated }, logout }) => {
   const publicLinks = (
     <ul>
       <li>
@@ -33,11 +33,14 @@ const Navbar = ({ logout }) => {
               Approved
           </NavLink>
       </li>
-      <li>
-          <NavLink to="/profile">
+      { profileCreated && <>
+          <li>
+            <NavLink to="/profile">
               My Profile
-          </NavLink>
-      </li>
+            </NavLink>
+        </li>
+      </>}
+
       <li>
           <NavLink to="/dashboard">
               My Dashboard
@@ -64,7 +67,7 @@ const Navbar = ({ logout }) => {
           </div>
         </Link>
 
-       { userStatus.isAuthenticated ? privateLinks : publicLinks }
+       { isAuthenticated ? privateLinks : publicLinks }
        
       </nav>
     )
@@ -72,9 +75,16 @@ const Navbar = ({ logout }) => {
 
 // Validate the data-type of the props passed to the component
 Navbar.propTypes = {
+  authSlice: PropTypes.object.isRequired,
+  profileSlice: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired
 }
 
+// Get the required slices of the store and pass them to the component as props
+const mapStateToProps = store => ({
+  authSlice: store.authSlice,
+  profileSlice: store.profileSlice,
+})
 
 // Connect the redux world to the Navbar component world
-export default connect(null, { logout })(Navbar);  // logout here is an action creation function that Navbar requires
+export default connect(mapStateToProps, { logout })(Navbar);  // logout here is an action creation function that Navbar requires
