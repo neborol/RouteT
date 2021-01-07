@@ -13,5 +13,50 @@
       "helpers": "2",
       "status": "started"
     }
+  },
+  {
+    "profileId": "92dbb68b-f4ca-498b-9fc1-9abcee5cce04",
+    "profileOwner": "David Moss",
+    "profileFields": {
+      "role": "Co-Developer",
+      "title": "People Innovation",
+      "problem": "People are too idle",
+      "solution": "Will get people things to do",
+      "duration": "2 Weeks",
+      "breakdown": "intro and then done",
+      "tools": "Node electron",
+      "helpers": "2",
+      "status": "started"
+    }
+  },
+  {
+    "profileId": "b9861e7d-a2d3-4d57-8cf6-f25b1e5b0e50",
+    "profileOwner": "Samuel Eboa",
+    "profileFields": {
+      "role": "Innovations Manager",
+      "title": "School Innovation",
+      "problem": "Lack of schools",
+      "solution": "Will create knowledge",
+      "duration": "1 week",
+      "breakdown": "intro and then done",
+      "tools": "JavaScript",
+      "helpers": "3",
+      "status": "started"
+    }
+  },
+  {
+    "profileId": "b9861e7d-a2d3-4d57-8cf6-f25b1e5b0e50",
+    "profileOwner": "Samuel Eboa",
+    "profileFields": {
+      "role": "Co-Developer",
+      "title": "School Innovation",
+      "problem": "Lack of schools",
+      "solution": "Will create knowledge",
+      "duration": "1 week",
+      "breakdown": "intro and then done",
+      "tools": "JavaScript",
+      "helpers": "4",
+      "status": "started"
+    }
   }
 ]
