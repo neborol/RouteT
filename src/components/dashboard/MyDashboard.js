@@ -9,12 +9,13 @@ import { Link } from 'react-router-dom'
 
 
 const MyDashboard = ({ authSlice: { user }, profileSlice: { profile, loading, profileCreated }, getCurrentProfile, setLoginStatus }) => {
+    
     profile = null;
     useEffect(() => {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         currentUser.isAuthenticated ? setLoginStatus(true) : setLoginStatus(false);
         getCurrentProfile();
-    }, [getCurrentProfile]);
+    }, []);
 
 
     return loading && profile === null ? (<Spinner loading={loading}/>) :  (
@@ -26,7 +27,7 @@ const MyDashboard = ({ authSlice: { user }, profileSlice: { profile, loading, pr
 
             { 
                 profileCreated ? <>
-                    <h3>Thank you for creating your profile</h3>
+                    <h3>Thank you for having created a profile</h3>
                     <p>Here is how much progress you have made so far, according to the breakdown of your project.</p>
                      <div>-----  <strong> Graphical Representation of breakdown comes here. </strong>   -----</div>   
                 </> :
