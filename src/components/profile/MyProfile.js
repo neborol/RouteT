@@ -86,6 +86,7 @@ const MyProfile = ({ authSlice, profileSlice: { profile }, setLoginStatus, getCu
     )
 }
 
+
 // Validate the data-type of the props passed to the component
 MyProfile.propTypes = {
     authSlice: PropTypes.object.isRequired,
